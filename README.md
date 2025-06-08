@@ -1,2 +1,2 @@
 # Grafana
-Model for grafana dashboard import the model.json inside your dashboard grafana.
+Model for grafana dashboard import the <code>model.json</code> inside your dashboard grafana.
