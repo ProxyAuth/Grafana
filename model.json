@@ -1,0 +1,288 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 2,
+  "id": 1,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "b62dbfea-6e21-4789-9ada-3e1ad359f7ad"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqpm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "b62dbfea-6e21-4789-9ada-3e1ad359f7ad"
+          },
+          "editorMode": "builder",
+          "expr": "count_over_time({level=\"info\"} |= `is logged` [1m])",
+          "hide": true,
+          "legendFormat": "is_logged",
+          "queryType": "instant",
+          "refId": "A",
+          "step": "1m"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$A",
+          "hide": false,
+          "reducer": "mean",
+          "refId": "B",
+          "type": "math"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "b62dbfea-6e21-4789-9ada-3e1ad359f7ad"
+          },
+          "editorMode": "builder",
+          "expr": "count_over_time({level=\"info\"} |= `new token` [1m])",
+          "hide": false,
+          "legendFormat": "new_token",
+          "queryType": "range",
+          "refId": "C",
+          "step": ""
+        }
+      ],
+      "title": "Rate",
+      "transformations": [],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "b62dbfea-6e21-4789-9ada-3e1ad359f7ad"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": true,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": -1,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "displayName": "ProxyAuth",
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 17,
+        "x": 7,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "b62dbfea-6e21-4789-9ada-3e1ad359f7ad"
+          },
+          "editorMode": "builder",
+          "expr": "count_over_time({app=\"proxyauth\"} |= `new token` [1m])",
+          "legendFormat": "new_token",
+          "queryType": "instant",
+          "refId": "A",
+          "step": "5m"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "b62dbfea-6e21-4789-9ada-3e1ad359f7ad"
+          },
+          "editorMode": "builder",
+          "expr": "count_over_time({app=\"proxyauth\"} |= `is logged` [1m])",
+          "hide": false,
+          "legendFormat": "is logged",
+          "queryType": "instant",
+          "refId": "B",
+          "step": "5m"
+        }
+      ],
+      "title": "Metrics",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "b62dbfea-6e21-4789-9ada-3e1ad359f7ad"
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 1,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Ascending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "b62dbfea-6e21-4789-9ada-3e1ad359f7ad"
+          },
+          "editorMode": "builder",
+          "expr": "{app=\"proxyauth\"}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Logs ProxyAuth",
+      "transparent": true,
+      "type": "logs"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "ProxyAuth",
+  "uid": "cb98bcef-d590-4873-aeb4-d78115119071",
+  "version": 8,
+  "weekStart": ""
+}
